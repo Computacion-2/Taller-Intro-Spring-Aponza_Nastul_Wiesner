@@ -2,16 +2,16 @@
 
 Sistema de gestión de discografía de artistas musicales usando Spring Framework (Inyección de Dependencias) y Servlets.
 
-## 🛠️ Requisitos de Entorno (¡Importante para el equipo!)
+##  Requisitos de Entorno (¡Importante para el equipo!)
 
 Para que el proyecto corra sin errores de compilación o ejecución, todos los miembros del equipo deben tener instaladas las siguientes versiones:
 
 - **Java JDK:** 1.8 (Java 8) o superior.
 - **Maven:** 3.6+
-- **Tomcat:** **10.1 o superior** ⚠️ (MUY IMPORTANTE: Usamos jakarta.servlet versión 6.0, por lo que Tomcat 9 o anteriores lanzarán error. Debe ser Tomcat 10+).
+- **Tomcat:** **10.1 o superior**  (MUY IMPORTANTE: Usamos jakarta.servlet versión 6.0, por lo que Tomcat 9 o anteriores lanzarán error. Debe ser Tomcat 10+).
 - **Spring Framework:** 6.1.6
 
-## 🚀 Cómo ejecutar el proyecto
+##  Cómo ejecutar el proyecto
 
 1. Clonar el repositorio.
 2. Abrir el proyecto en IntelliJ IDEA o tu IDE preferido.
@@ -19,7 +19,7 @@ Para que el proyecto corra sin errores de compilación o ejecución, todos los m
 4. Configurar un servidor **Tomcat 10+** local en tu IDE.
 5. Desplegar el artefacto war en el servidor Tomcat y ejecutar.
 
-## 👥 Equipo
-- Aponza
-- Nastul
-- Wiesner
+##  Equipo
+- Aponza Valencia Juan José
+- Nastul Daniel
+- Wiesner Justin

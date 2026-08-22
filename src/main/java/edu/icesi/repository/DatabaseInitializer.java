@@ -18,13 +18,10 @@ public class DatabaseInitializer {
         for (int i = 1; i <= 10; i++) {
             Artist artist = new Artist("A" + i, "Artista " + i, "Colombia");
             artistRepository.create(artist);
-
-            // Crear 5 tracks por cada artista (Total 50)
             for (int j = 1; j <= 5; j++) {
                 String trackId = "T" + i + "-" + j;
                 Track track = new Track(trackId, "Canción " + trackId, "Rock", 180, "Álbum " + i);
 
-                // Establecer la relación Many-to-Many
                 track.addArtist(artist);
                 artist.addTrack(track);
 

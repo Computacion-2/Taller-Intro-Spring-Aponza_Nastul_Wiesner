@@ -1,10 +1,12 @@
-package edu.icesi.repository;
+package edu.icesi.repository.impl;
 
 import edu.icesi.model.Track;
+import edu.icesi.repository.ITrackRepository;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class TrackRepositoryImpl implements TrackRepository {
+public class TrackRepositoryImpl implements ITrackRepository {
     
     private final List<Track> tracks = new ArrayList<>();
 

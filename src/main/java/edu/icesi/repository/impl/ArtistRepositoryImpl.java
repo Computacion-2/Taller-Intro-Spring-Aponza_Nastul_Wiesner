@@ -1,10 +1,12 @@
-package edu.icesi.repository;
+package edu.icesi.repository.impl;
 
 import edu.icesi.model.Artist;
+import edu.icesi.repository.IArtistRepository;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class ArtistRepositoryImpl implements ArtistRepository {
+public class ArtistRepositoryImpl implements IArtistRepository {
     
     private final List<Artist> artists = new ArrayList<>();
 

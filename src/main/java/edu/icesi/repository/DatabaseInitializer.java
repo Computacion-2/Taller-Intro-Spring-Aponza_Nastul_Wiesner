@@ -5,14 +5,13 @@ import edu.icesi.model.Track;
 
 public class DatabaseInitializer {
     
-    private final ArtistRepository artistRepository;
-    private final TrackRepository trackRepository;
+    private final IArtistRepository artistRepository;
+    private final ITrackRepository trackRepository;
 
-    public DatabaseInitializer(ArtistRepository artistRepository, TrackRepository trackRepository) {
+    public DatabaseInitializer(IArtistRepository artistRepository, ITrackRepository trackRepository) {
         this.artistRepository = artistRepository;
         this.trackRepository = trackRepository;
     }
-
 
     public void initData() {
         for (int i = 1; i <= 10; i++) {

@@ -1,28 +1,28 @@
 package edu.icesi.servlet;
 
 import edu.icesi.model.Artist;
-import edu.icesi.service.ArtistService;
+import edu.icesi.service.IArtistService;
+
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.annotation.*;
+import jakarta.servlet.http.*;
+
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.UUID;
 
 @WebServlet("/artists")
 public class ArtistServlet extends HttpServlet {
 
-    private ArtistService artistService;
+    private IArtistService artistService;
 
     @Override
     public void init() throws ServletException {
+        super.init();
         WebApplicationContext context = WebApplicationContextUtils.getRequiredWebApplicationContext(getServletContext());
-        artistService = (ArtistService) context.getBean("artistServiceBean");
+        artistService = (IArtistService) context.getBean("artistServiceBean");
     }
 
     @Override
@@ -48,10 +48,8 @@ public class ArtistServlet extends HttpServlet {
         if ("create".equals(action)) {
             String name = request.getParameter("name");
             String nationality = request.getParameter("nationality");
-            String id = UUID.randomUUID().toString().substring(0, 8);
             
-            Artist newArtist = new Artist(id, name, nationality);
-            artistService.create(newArtist);
+            artistService.create(name, nationality);
             
         } else if ("delete".equals(action)) {
             String id = request.getParameter("id");

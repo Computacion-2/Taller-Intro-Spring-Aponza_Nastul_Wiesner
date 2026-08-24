@@ -41,7 +41,7 @@
 
   </dependencies>
   <build>
-    <finalName>Taller_Intro_Spring_Aponza_Nastul_Wiesner</finalName>
+    <finalName>discographicServlet</finalName>
   </build>
 </project>
 

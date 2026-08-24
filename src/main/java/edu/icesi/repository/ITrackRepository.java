@@ -4,7 +4,7 @@ import edu.icesi.model.Track;
 
 import java.util.List;
 
-public interface TrackRepository {
+public interface ITrackRepository {
     List<Track> findAll();
     void create(Track track);
     void deleteById(String id);

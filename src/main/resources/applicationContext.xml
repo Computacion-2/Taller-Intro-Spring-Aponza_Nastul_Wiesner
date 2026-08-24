@@ -3,10 +3,15 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans.xsd">
-    <bean id="artistRepositoryBean" class="edu.icesi.repository.ArtistRepositoryImpl" />
-    <bean id="trackRepositoryBean" class="edu.icesi.repository.TrackRepositoryImpl" />
+    <bean id="artistRepositoryBean" class="edu.icesi.repository.impl.ArtistRepositoryImpl" />
+    <bean id="trackRepositoryBean" class="edu.icesi.repository.impl.TrackRepositoryImpl" />
+
     <bean id="databaseInitializer" class="edu.icesi.repository.DatabaseInitializer" init-method="initData"><constructor-arg ref="artistRepositoryBean" /> <constructor-arg ref="trackRepositoryBean" /></bean>
-    <bean id="artistServiceBean" class="edu.icesi.service.ArtistServiceImpl"> <constructor-arg ref="artistRepositoryBean" /></bean>
-    <bean id="trackServiceBean" class="edu.icesi.service.TrackServiceImpl"> <constructor-arg ref="trackRepositoryBean" /></bean>
+    
+    <bean id="artistServiceBean" class="edu.icesi.service.impl.ArtistServiceImpl"> <constructor-arg ref="artistRepositoryBean" /></bean>
+    <bean id="trackServiceBean" class="edu.icesi.service.impl.TrackServiceImpl">
+        <constructor-arg ref="trackRepositoryBean" />
+        <constructor-arg ref="artistServiceBean" />
+    </bean>
 
 </beans>

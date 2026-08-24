@@ -1,31 +1,28 @@
 package edu.icesi.servlet;
 
-import edu.icesi.model.Artist;
-import edu.icesi.model.Track;
-import edu.icesi.service.ArtistService;
-import edu.icesi.service.TrackService;
+import edu.icesi.service.IArtistService;
+import edu.icesi.service.ITrackService;
+
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.annotation.*;
+import jakarta.servlet.http.*;
+
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import java.io.IOException;
-import java.util.UUID;
 
 @WebServlet("/tracks")
 public class TrackServlet extends HttpServlet {
 
-    private TrackService trackService;
-    private ArtistService artistService;
+    private ITrackService trackService;
+    private IArtistService artistService;
 
     @Override
     public void init() throws ServletException {
         WebApplicationContext context = WebApplicationContextUtils.getRequiredWebApplicationContext(getServletContext());
-        trackService = (TrackService) context.getBean("trackServiceBean");
-        artistService = (ArtistService) context.getBean("artistServiceBean");
+        trackService = (ITrackService) context.getBean("trackServiceBean");
+        artistService = (IArtistService) context.getBean("artistServiceBean");
     }
 
     @Override
@@ -46,20 +43,7 @@ public class TrackServlet extends HttpServlet {
             String albumTitle = request.getParameter("albumTitle");
             String[] artistIds = request.getParameterValues("artistIds"); // Capturamos las selecciones múltiples
             
-            String id = UUID.randomUUID().toString().substring(0, 8);
-            Track newTrack = new Track(id, title, genre, duration, albumTitle);
-
-            if (artistIds != null) {
-                for (String artistId : artistIds) {
-                    Artist artist = artistService.findAll().stream()
-                            .filter(a -> a.getId().equals(artistId)).findFirst().orElse(null);
-                    if (artist != null) {
-                        newTrack.addArtist(artist);
-                        artist.addTrack(newTrack);
-                    }
-                }
-            }
-            trackService.create(newTrack);
+            trackService.create(title, genre, duration, albumTitle, artistIds);
             
         } else if ("delete".equals(action)) {
             trackService.deleteById(request.getParameter("id"));

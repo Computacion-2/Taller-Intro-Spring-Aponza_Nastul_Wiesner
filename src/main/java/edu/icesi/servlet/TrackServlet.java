@@ -28,7 +28,7 @@ public class TrackServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("tracks", trackService.findAll());
-        request.setAttribute("artists", artistService.findAll()); 
+        request.setAttribute("artists", artistService.findAll());
         request.getRequestDispatcher("/WEB-INF/tracks.jsp").forward(request, response);
     }
 
@@ -41,7 +41,7 @@ public class TrackServlet extends HttpServlet {
             String genre = request.getParameter("genre");
             int duration = Integer.parseInt(request.getParameter("duration"));
             String albumTitle = request.getParameter("albumTitle");
-            String[] artistIds = request.getParameterValues("artistIds"); // Capturamos las selecciones múltiples
+            String[] artistIds = request.getParameterValues("artistIds");
             
             trackService.create(title, genre, duration, albumTitle, artistIds);
             

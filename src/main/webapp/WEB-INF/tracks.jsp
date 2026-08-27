@@ -76,6 +76,6 @@
 </table>
 
 <br>
-<a href="${pageContext.request.contextPath}/artists">⬅ Volver a Gestión de Artistas</a>
+<a href="${pageContext.request.contextPath}/artists">⬅️ Volver a Gestión de Artistas</a>
 </body>
 </html>

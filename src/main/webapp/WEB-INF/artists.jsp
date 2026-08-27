@@ -88,6 +88,8 @@
                     </c:forEach>
                 </tbody>
             </table>
+                <br>
+        <a href="${pageContext.request.contextPath}/tracks">Ir a Gestión de Tracks ➡️</a>
         </body>
 
         </html>

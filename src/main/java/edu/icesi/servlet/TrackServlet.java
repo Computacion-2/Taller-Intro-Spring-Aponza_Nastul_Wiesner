@@ -7,8 +7,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.*;
 import jakarta.servlet.http.*;
 
-import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.context.support.WebApplicationContextUtils;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.io.IOException;
 
@@ -20,9 +19,10 @@ public class TrackServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        WebApplicationContext context = WebApplicationContextUtils.getRequiredWebApplicationContext(getServletContext());
-        trackService = (ITrackService) context.getBean("trackServiceBean");
-        artistService = (IArtistService) context.getBean("artistServiceBean");
+        super.init();
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(edu.icesi.config.AppConfig.class);
+        this.trackService = (ITrackService) context.getBean("trackServiceImpl");
+        this.artistService = (IArtistService) context.getBean("artistServiceImpl");
     }
 
     @Override

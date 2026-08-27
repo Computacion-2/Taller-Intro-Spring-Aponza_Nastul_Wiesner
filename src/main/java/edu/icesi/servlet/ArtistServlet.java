@@ -7,8 +7,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.*;
 import jakarta.servlet.http.*;
 
-import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.context.support.WebApplicationContextUtils;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.io.IOException;
 import java.util.List;
@@ -21,8 +20,8 @@ public class ArtistServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
-        WebApplicationContext context = WebApplicationContextUtils.getRequiredWebApplicationContext(getServletContext());
-        artistService = (IArtistService) context.getBean("artistServiceBean");
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(edu.icesi.config.AppConfig.class);
+        this.artistService = (IArtistService) context.getBean("artistServiceImpl");
     }
 
     @Override

@@ -9,12 +9,17 @@ import edu.icesi.service.IArtistService;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
 public class TrackServiceImpl implements ITrackService {
     
     private final ITrackRepository trackRepository;
     private final IArtistService artistService;
 
     // by constructor
+    @Autowired
     public TrackServiceImpl(ITrackRepository trackRepository, IArtistService artistService) {
         this.trackRepository = trackRepository;
         this.artistService = artistService;

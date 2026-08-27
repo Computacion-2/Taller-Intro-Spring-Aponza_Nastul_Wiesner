@@ -1,18 +1,26 @@
 package edu.icesi.repository;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import edu.icesi.model.Artist;
 import edu.icesi.model.Track;
 
+import jakarta.annotation.PostConstruct;
+
+@Component
 public class DatabaseInitializer {
     
     private final IArtistRepository artistRepository;
     private final ITrackRepository trackRepository;
 
+    @Autowired
     public DatabaseInitializer(IArtistRepository artistRepository, ITrackRepository trackRepository) {
         this.artistRepository = artistRepository;
         this.trackRepository = trackRepository;
     }
 
+    @PostConstruct
     public void initData() {
         for (int i = 1; i <= 10; i++) {
             Artist artist = new Artist("A" + i, "Artista " + i, "Colombia");

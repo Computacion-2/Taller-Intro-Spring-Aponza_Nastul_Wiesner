@@ -6,9 +6,6 @@ import edu.icesi.repository.IArtistRepository;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.stereotype.Repository;
-
-@Repository
 public class ArtistRepositoryImpl implements IArtistRepository {
     
     private final List<Artist> artists = new ArrayList<>();

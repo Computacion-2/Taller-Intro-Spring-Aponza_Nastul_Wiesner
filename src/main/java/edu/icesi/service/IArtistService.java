@@ -1,6 +1,7 @@
 package edu.icesi.service;
 
 import edu.icesi.model.Artist;
+
 import java.util.List;
 
 public interface IArtistService {

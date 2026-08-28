@@ -6,9 +6,6 @@ import edu.icesi.repository.ITrackRepository;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.stereotype.Repository;
-
-@Repository
 public class TrackRepositoryImpl implements ITrackRepository {
     
     private final List<Track> tracks = new ArrayList<>();

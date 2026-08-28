@@ -7,16 +7,11 @@ import edu.icesi.service.IArtistService;
 import java.util.List;
 import java.util.UUID;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-@Service
 public class ArtistServiceImpl implements IArtistService {
     
     private final IArtistRepository artistRepository;
 
-    // Inyección por constructor
-    @Autowired
     public ArtistServiceImpl(IArtistRepository artistRepository) {
         this.artistRepository = artistRepository;
     }

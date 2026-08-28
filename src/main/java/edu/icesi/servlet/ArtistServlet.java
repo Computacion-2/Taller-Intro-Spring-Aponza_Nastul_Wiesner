@@ -1,5 +1,6 @@
 package edu.icesi.servlet;
 
+import edu.icesi.config.SpringContextManager;
 import edu.icesi.model.Artist;
 import edu.icesi.service.IArtistService;
 
@@ -20,7 +21,7 @@ public class ArtistServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(edu.icesi.config.AppConfig.class);
+        AnnotationConfigApplicationContext context = SpringContextManager.getContext();
         this.artistService = (IArtistService) context.getBean("artistServiceImpl");
     }
 

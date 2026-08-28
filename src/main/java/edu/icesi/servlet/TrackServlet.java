@@ -1,5 +1,6 @@
 package edu.icesi.servlet;
 
+import edu.icesi.config.SpringContextManager;
 import edu.icesi.service.IArtistService;
 import edu.icesi.service.ITrackService;
 
@@ -20,7 +21,7 @@ public class TrackServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(edu.icesi.config.AppConfig.class);
+        AnnotationConfigApplicationContext context = SpringContextManager.getContext();
         this.trackService = (ITrackService) context.getBean("trackServiceImpl");
         this.artistService = (IArtistService) context.getBean("artistServiceImpl");
     }

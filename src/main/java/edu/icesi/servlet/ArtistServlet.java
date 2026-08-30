@@ -22,7 +22,7 @@ public class ArtistServlet extends HttpServlet {
     public void init() throws ServletException {
         super.init();
         AnnotationConfigApplicationContext context = SpringContextManager.getContext();
-        this.artistService = (IArtistService) context.getBean("artistServiceImpl");
+        this.artistService = (IArtistService) context.getBean("artistService");
     }
 
     @Override

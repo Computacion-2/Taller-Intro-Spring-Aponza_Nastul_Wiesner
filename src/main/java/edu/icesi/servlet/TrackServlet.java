@@ -22,8 +22,8 @@ public class TrackServlet extends HttpServlet {
     public void init() throws ServletException {
         super.init();
         AnnotationConfigApplicationContext context = SpringContextManager.getContext();
-        this.trackService = (ITrackService) context.getBean("trackServiceImpl");
-        this.artistService = (IArtistService) context.getBean("artistServiceImpl");
+        this.trackService = (ITrackService) context.getBean("trackService");
+        this.artistService = (IArtistService) context.getBean("artistService");
     }
 
     @Override

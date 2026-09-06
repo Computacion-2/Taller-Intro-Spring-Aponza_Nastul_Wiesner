@@ -34,12 +34,25 @@
                     margin-bottom: 20px;
                     border: 1px solid #ccc;
                 }
+
+                .alert {
+                    background: #fff3cd;
+                    border: 1px solid #ffe69c;
+                    color: #664d03;
+                    padding: 12px;
+                    margin-bottom: 20px;
+                }
             </style>
         </head>
 
         <body>
             <h1>Directorio de Artistas</h1>
 
+            <c:if test="${param.error == 'artistHasTracks'}">
+                <div class="alert" role="alert">
+                    No se puede eliminar este artista porque tiene canciones asociadas.
+                </div>
+            </c:if>
 
             <div class="form-section">
                 <h3>Buscar Artista</h3>

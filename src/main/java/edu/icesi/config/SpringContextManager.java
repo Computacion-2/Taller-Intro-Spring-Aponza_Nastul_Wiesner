@@ -1,19 +1,19 @@
-package edu.icesi.config;
+    package edu.icesi.config;
 
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+    import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-public class SpringContextManager {
+    public class SpringContextManager {
 
-    private static AnnotationConfigApplicationContext context;
+        private static AnnotationConfigApplicationContext context;
 
-    private SpringContextManager() {
-        // Constructor privado para evitar instanciación externa
-    }
-
-    public static synchronized AnnotationConfigApplicationContext getContext() {
-        if (context == null) {
-            context = new AnnotationConfigApplicationContext(AppConfig.class);
+        private SpringContextManager() {
+            // Constructor privado para evitar instanciación externa
         }
-        return context;
+
+        public static synchronized AnnotationConfigApplicationContext getContext() {
+            if (context == null) {
+                context = new AnnotationConfigApplicationContext(AppConfig.class);
+            }
+            return context;
+        }
     }
-}

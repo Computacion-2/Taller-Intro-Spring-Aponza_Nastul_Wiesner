@@ -5,7 +5,7 @@ import edu.icesi.repository.IArtistRepository;
 import edu.icesi.service.IArtistService;
 
 import java.util.List;
-import java.util.UUID;
+import java.util.Optional;
 
 public class ArtistServiceImpl implements IArtistService {
     
@@ -20,15 +20,34 @@ public class ArtistServiceImpl implements IArtistService {
     public List<Artist> findAll() { return artistRepository.findAll(); }
 
     @Override
-    public void create(String name, String nationality) {
-        String id = UUID.randomUUID().toString().substring(0, 8);
-        Artist artist = new Artist(id, name, nationality);
+    public Artist create(String name, String nationality) {
+        Artist artist = new Artist(null, name, nationality);
         artistRepository.create(artist);
+        return artist;
     }
 
     @Override
-    public Artist findByNameWithTracks(String name) { return artistRepository.findByNameWithTracks(name); }
+    public Artist findByNameWithTracks(String name) {
+        return artistRepository.findByNameWithTracks(name).orElse(null);
+    }
 
     @Override
-    public void deleteById(String id) { artistRepository.deleteById(id); }
+    public Artist findById(String id) {
+        Optional<Artist> artistOpt = artistRepository.findById(id);
+        if (artistOpt.isEmpty()) { return null; }
+        return artistOpt.get();
+    }
+
+    @Override
+    public boolean deleteById(String id) {
+        Optional<Artist> artistOpt = artistRepository.findById(id);
+        if (artistOpt.isEmpty()) { return false; }
+        Artist artist = artistOpt.get();
+        
+        if (!artist.getTracks().isEmpty()) {
+            return false;
+        }
+        artistRepository.deleteById(id);
+        return true;
+    }
 }

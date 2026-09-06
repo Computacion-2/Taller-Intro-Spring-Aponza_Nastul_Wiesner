@@ -5,6 +5,8 @@ import edu.icesi.repository.IArtistRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 public class ArtistRepositoryImpl implements IArtistRepository {
     
@@ -12,20 +14,29 @@ public class ArtistRepositoryImpl implements IArtistRepository {
 
     @Override
     public List<Artist> findAll() {
-        return artists;
+        return new ArrayList<>(artists);
     }
 
     @Override
     public void create(Artist artist) {
+        if (artist.getId() == null) {
+            artist.setId(UUID.randomUUID().toString().substring(0, 8));
+        }
         artists.add(artist);
     }
 
     @Override
-    public Artist findByNameWithTracks(String name) {
+    public Optional<Artist> findById(String id) {
+        return artists.stream()
+                .filter(a -> a.getId().equals(id))
+                .findFirst();
+    }
+
+    @Override
+    public Optional<Artist> findByNameWithTracks(String name) {
         return artists.stream()
             .filter(a -> a.getName().equalsIgnoreCase(name))
-            .findFirst()
-            .orElse(null);
+            .findFirst();
     }
 
     @Override

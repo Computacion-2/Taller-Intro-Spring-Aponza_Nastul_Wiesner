@@ -7,7 +7,7 @@ import edu.icesi.service.ITrackService;
 import edu.icesi.service.IArtistService;
 
 import java.util.List;
-import java.util.UUID;
+import java.util.Optional;
 
 public class TrackServiceImpl implements ITrackService {
     
@@ -24,14 +24,12 @@ public class TrackServiceImpl implements ITrackService {
     public List<Track> findAll() { return trackRepository.findAll(); }
 
     @Override
-    public void create(String title, String genre, int duration, String albumTitle, String[] artistIds) {
-        String id = UUID.randomUUID().toString().substring(0, 8);
-        Track newTrack = new Track(id, title, genre, duration, albumTitle);
+    public Track create(String title, String genre, int duration, String albumTitle, String[] artistIds) {
+        Track newTrack = new Track(null, title, genre, duration, albumTitle);
 
         if (artistIds != null) {
             for (String artistId : artistIds) {
-                Artist artist = artistService.findAll().stream()
-                        .filter(a -> a.getId().equals(artistId)).findFirst().orElse(null);
+                Artist artist = artistService.findById(artistId);
                 if (artist != null) {
                     newTrack.addArtist(artist);
                     artist.addTrack(newTrack);
@@ -39,8 +37,15 @@ public class TrackServiceImpl implements ITrackService {
             }
         }
         trackRepository.create(newTrack);
+        return newTrack;
     }
 
     @Override
-    public void deleteById(String id) { trackRepository.deleteById(id); }
+    public void deleteById(String id) {
+        Optional<Track> trackOpt = trackRepository.findById(id);
+        if (trackOpt.isEmpty()) return;
+        Track track = trackOpt.get();
+        track.getArtists().forEach(artist -> artist.getTracks().remove(track));
+        trackRepository.deleteById(id);
+    }
 }

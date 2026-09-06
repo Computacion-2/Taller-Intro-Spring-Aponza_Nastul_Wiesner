@@ -53,7 +53,11 @@ public class ArtistServlet extends HttpServlet {
             
         } else if ("delete".equals(action)) {
             String id = request.getParameter("id");
-            artistService.deleteById(id);
+            boolean deleted = artistService.deleteById(id);
+            if (!deleted) {
+                response.sendRedirect(request.getContextPath() + "/artists?error=artistHasTracks");
+                return;
+            }
         }
         response.sendRedirect(request.getContextPath() + "/artists");
     }
